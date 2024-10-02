@@ -1,0 +1,33 @@
+
+
+<form [formGroup]="applyForm" (submit)="submitApplication()" class="m-auto max-w-full min-w-full  flex flex-col items-center pt-1 mt-3">
+  <input type="text" id="taskName" class="max-w-90% min-w-90% pl-3 text-sm placeholder:text-gray-500  border border-blue-500 rounded-lg my-3 bg-gray-300 h-9" placeholder="add task" formControlName="taskName"  >
+  <div class=" max-w-90% min-w-90%  flex justify-end"> <button type="submit" class="py-2 mb-6 px-3 mr-3 rounded-md text-sm text-white bg-blue-500">Add</button> </div>
+  <div class="to-do-list  flex flex-col  max-w-90% min-w-90% min-h-12 pl-3 mt-2" *ngFor="let task of taskList">
+
+    <div  class=" flex justify-between items-center max-w-100% min-w-100% text-white text-sm">
+      <div (click)="openUpdateComp(task.id)" class=" max-w-80% min-w-80%">{{task.title}} {{task.created_at | date:'dd-MM-yy'}}</div>
+    <div (click)="deleteTask(task.id)"  class="p-2 mr-2.5 text-2xl text-red-400  max-w-5% min-w-5%">x</div>
+    </div>
+
+    <div [formGroup]="updateForm"  [ngStyle]="{'display':openUpdate==task.id ? '':'none'}">
+      <input type="text" id="taskName" class="max-w-90% min-w-90% pl-3 text-sm placeholder:text-gray-500  border border-blue-500 rounded-lg my-3 bg-gray-300 h-9" placeholder="add task" formControlName="taskName"  >
+      <div  class=" max-w-90% min-w-90%  flex justify-end"> <button (click)="updateTask(task.id)" type="button"  class="py-2 mb-6 px-3 mr-3 rounded-md text-sm text-white bg-blue-500">update</button> </div>
+
+    </div >
+
+  </div>
+
+
+
+</form>
+
+<!--
+<div [ngClass]="{ 'active-class': isActive, 'inactive-class': !isActive }" class="m-auto max-w-full min-w-full xxs:max-w-96 xxs:min-w-96">
+  This div's class changes based on the isActive property.
+</div>
+<button (click)="toggleActive()">Toggle Active</button> -->
+
+
+<!-- app.component.html -->
+

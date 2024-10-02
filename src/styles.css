@@ -1,1 +1,75 @@
+/*
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "primeng/resources/themes/saga-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";  */
+
 /* You can add global styles to this file, and also import other style files */
+
+
+@import "../node_modules/tailwindcss/base.css" layer(tailwindcss);
+@import "../node_modules/tailwindcss/components.css" layer(tailwindcss);
+@import "../node_modules/tailwindcss/utilities.css" layer(tailwindcss);
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+
+.active-class {
+  color: green;
+  display: block;
+}
+
+.inactive-class {
+  color: red;
+  display: none;
+}
+
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.5em 1.5em;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.submit-button:disabled {
+  cursor: not-allowed;
+  background-color: #D1D5DB;
+  color: #111827;
+}
+
+.submit-button:disabled:hover {
+  background-color: #9CA3AF;
+}
+
+.credit-card {
+  margin-top: 3rem;
+  min-height: calc(100vh - 40px);
+  max-height:calc(100vh - 40px) ;
+}
+
+@media only screen and (max-width: 420px)  {
+  .credit-card .front {
+    font-size: 100%;
+    padding: 0 2;
+    bottom: 2rem !important;
+
+  }
+
+  .credit-card .front .number {
+    margin-bottom: 0.5rem !important;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.to-do-list{
+  background-color: rgba(48, 48, 53, 0.392);
+}

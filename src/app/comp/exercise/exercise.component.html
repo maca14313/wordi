@@ -1,0 +1,75 @@
+
+<div class="m-auto max-w-full min-w-full bg-gray-50 dark:bg-gray-900  ">
+
+
+
+  <ul class="max-w-full pt-3 divide-y divide-gray-200 dark:divide-gray-700">
+    <div class=" ml-4 mb-2   text-base font-semibold text-gray-900 dark:text-white flex">Group <div class="text-blue-500 mx-1">{{indexOfWords + 1}}</div> </div>
+
+
+   <li  class="p-2 flex flex-col justify-center" *ngFor="let words of filteredWords">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse">
+         <div class="flex-shrink-0">
+            <div (click)="speak(words.word)" class="w-8 h-8 text-xl flex justify-center items-center rounded-full bg-cyan-100">🔈</div>
+         </div>
+         <div [routerLink]="['/practice',words.word,words.AMH,indexOfWords]"  class="flex-1 min-w-0 ">
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+             {{words.word}}
+            </p>
+            <p class="text-sm text-gray-500  dark:text-gray-400">
+             {{words.AMH}}
+            </p>
+         </div>
+
+      </div>
+   </li>
+
+ </ul>
+
+
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!--
+  <div class="m-auto max-w-full min-w-full  flex flex-col items-center gap-1 pt-1 ">
+  <div *ngFor="let words of filteredWords" class="flex justify-start items-start gap-3 m-0 max-w-95% min-w-95% min-h-12 py-2 pl-3 pr-3  text-sm  border-l-2 border-blue-500 bg-blue-500 text-white">
+
+    <div (click)="speak(words.word)" class="bg-white flex justify-center items-center rounded-full max-h-6 min-h-6 min-w-6 max-w-6  ">
+      🔈
+    </div>
+
+    <div  class="" >
+      <div class="text-sm capitalize">{{words.word}}</div>
+      <div class="text-sm mt-1 ">{{words.AMH}}</div>
+    </div>
+
+</div>
+
+</div>
+ -->
+
+
+
+

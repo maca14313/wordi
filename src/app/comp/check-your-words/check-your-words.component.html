@@ -1,0 +1,26 @@
+<div class="m-auto max-w-full min-w-full border ">
+
+
+  <section class="max-w-full min-w-full sm:max-w-600 sm:min-w-600 fixed top-10 left-1/2 -translate-x-1/2  min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div class="max-w-full min-w-full min-h-screen flex flex-col items-center justify-center my-3 px-6 py-8 mx-auto md:h-screen lg:py-0">
+
+        <div class=" max-w-full min-w-full min-h-screen     md:mt-0 sm:max-w-md xl:p-">
+            <div class="max-w-full min-w-full min-h-screen flex flex-col justify-start  space-y-4 md:space-y-6 ">
+
+                <div (click)="speak(wordToCheckId)" class="w-12 h-12 rounded-full   flex justify-center items-center text-4xl">🔈</div>
+                <form [formGroup]="checkWordForm" (submit)="checkWord()" class="max-w-full min-w-full space-y-4 md:space-y-6" action="#">
+                    <div class="max-w-full min-w-full">
+                        <label for="em" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{amhToCheckId}}</label>
+                        <input [ngStyle]="{'background-color':isCorrect==1?'rgb(4, 199, 4)':isCorrect==2?'red':''}" type="text"  class="mt-5 bg-gray-200 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block max-w-full min-w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" formControlName="word" placeholder="write the word" required="">
+                    </div>
+
+                    
+                    <div  class="w-full text-white rounded rounded-lg bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium  text-sm px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"><button type="submit" class="w-full text-white  font-medium  text-sm  text-center ">Check</button></div>
+                    <div class="flex justify-end text-sm font-light text-gray-500 dark:text-gray-400">
+                      <div (click)="changeWord()" class="font-medium text-primary-600 hover:underline dark:text-primary-500">change</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </section>

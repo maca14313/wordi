@@ -1,0 +1,180 @@
+### Page Routing
+
+1. in app.routes.ts
+
+import { Routes } from '@angular/router';
+import { PracticeComponent } from './comp/practice/practice.component';
+
+
+export const routes:Routes=[
+  {
+    path:'practice/:word/:amh/:group',
+    component:ExerciseComponent,
+    title: 'Exercise',
+  }
+]
+
+2. in app.config.ts
+
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes)]
+};
+
+
+AND for links
+
+<div [routerLink]="['/practice',words.word,words.AMH,indexOfWords]" >
+add import {RouterOutlet,RouterLink } from '@angular/router'; in to the component
+then in imports: [RouterOutlet,RouterLink]
+
+AND for  getting the routes info
+
+1. in practice.component
+import {ActivatedRoute} from '@angular/router';
+
+
+export class PracticeComponent implements OnInit,AfterViewInit {
+  route: ActivatedRoute = inject(ActivatedRoute);
+
+  for example this.wordToCheckId = this.route.snapshot.params['word'];
+              this.indexOfWords = parseInt(this.route.snapshot.params['id'], 10);
+
+
+  }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+### To import another component to a component
+
+import {HousingLocationComponent} from '../housing-location/housing-location.component';
+
+imports: [HousingLocationComponent],
+
+* in html
+     <app-housing-location></app-housing-location>
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+### Forms
+
+1 in component
+import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+
+*then
+imports: [ReactiveFormsModule],
+
+*then in class
+  for example
+ checkWordForm = new FormGroup({
+      word: new FormControl(''),
+    });
+
+*then you can accesse it like this
+
+checkWord(){
+    const checkedWord=this.checkWordForm.value.word ?? ''
+  }
+
+2 in html
+
+ <form [formGroup]="checkWordForm" (submit)="checkWord()" >
+ <input  formControlName="word" >
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+###  Services
+
+1 in service
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { filteredObjectWordType } from '../types/crude';
+
+
+in class
+
+  constructor(private http:HttpClient) { }
+
+apiUrl:string='http://localhost:7000/';
+searchWordObjects:filteredObjectWordType[]=[]
+
+ searchWord() {
+      this.searchWordObjects = [];
+      return this.searchWordObjects;
+ }
+
+ updateTaskApi(title:any,id:number):Observable<any>{
+    console.log(title,id)
+    return this.http.post<any>(this.apiUrl + 'updatetask',{title:title,id:id})
+   }
+
+2 To use Services import it to the component
+
+import { ApiServiceService } from './services/api-service.service';
+
+*then in class
+private apiServiceService=inject(ApiServiceService)
+
+for example
+
+searchingWord(){
+     this.apiServiceService.searchWord()
+  }
+
+updateTask(id:number){
+
+    const title=this.updateForm.value.taskName ?? '';
+    this.apiService.updateTaskApi(title,id).subscribe(
+     response=>{
+      this.getTasks()
+      alert('task updated')
+      console.log(response)
+     },
+     error =>{
+      alert(error)
+      console.error('Error creating task:', error);
+     }
+    )
+  }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+###  *ngFor or map
+
+  <div class="to-do-list  flex flex-col  max-w-90% min-w-90% min-h-12 pl-3 mt-2" *ngFor="let task of taskList">
+
+    <div (click)="openUpdateComp(task.id)" >{{task.title}} {{task.created_at | date:'dd-MM-yy'}}</div>
+
+ </div>
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+### OnInit DoCheck
+
+import { Component, DoCheck, Input, OnInit, inject } from '@angular/core';
+
+export class ToDoComponent implements OnInit, DoCheck {
+
+testChange:any=1;
+private previousData: any;
+
+ngOnInit() :void {
+  this.getTasks()
+}
+
+ngDoCheck(){
+    if(this.testChange!==this.previousData){
+      //alert('change'+this.testChange)
+    }
+  }
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+### inline style
+
+<input [ngStyle]="{'background-color':isCorrect==1?'rgb(4, 199, 4)':isCorrect==2?'red':''}" type="text"  class="mt-5 bg-gray-200 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block max-w-full min-w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" formControlName="word" placeholder="write the word" required="">
+
